@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons >
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides class="ion-padding"  pager="true">
+    <ion-slide *ngFor="let slide of product?.images">
+      <ion-img [src]="slide?.src" alt="{{product?.name}}"></ion-img>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item-divider></ion-item-divider>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding"> 
+      <ion-col class="ion-no-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <h2>{{product?.name}}</h2>
+            </ion-card-title>
+            <ion-card-subtitle>
+              <ion-chip *ngFor="let cat of product?.categories" color="secondary">
+               {{cat?.name}}
+              </ion-chip>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>
+              <p>{{product?.description.substr(0, 50)}}</p>
+              <ion-text>{{product?.price | currency:"INR"}}</ion-text>
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar style="padding: 0 10px;">
+    <ion-label>
+      <ion-button color="dark" expand="full" fill="solid" (click)="addProduct(product)">
+        ADD TO CART
+      </ion-button>
+    </ion-label>
+  </ion-toolbar>
+</ion-footer>

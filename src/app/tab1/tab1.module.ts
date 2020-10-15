@@ -1,3 +1,5 @@
+import { FilterMenuComponent } from './../components/filter-menu/filter-menu.component';
+import { SortModalComponent } from './../components/sort-modal/sort-modal.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,6 +17,6 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, SortModalComponent, FilterMenuComponent]
 })
 export class Tab1PageModule {}

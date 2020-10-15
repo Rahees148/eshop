@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar 
+      debounce="500"
+      color="light"
+      (ionChange) = "search($event)"
+      placeholder = "Enter keyword"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list *ngIf="filtereProducts.length > 0">
+          <ion-item *ngFor="let prod of filtereProducts" class="item-entry" detail routerLink="/tabs/tab1/prod-detail/{{prod.id}}" >
+            <ion-thumbnail>
+              <ion-img [src]="prod.images[0].src" alt="{{prod.name}}"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              <h4 class="item-name">{{prod.name}}</h4>
+              <ion-text>
+                {{prod.price | currency:"INR"}}
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- Show the skeleton list -->
+        <ion-list *ngIf="showSkeleton">
+          <ion-item *ngFor="let d of [].constructor(5)" class="item-entry" >
+            <ion-thumbnail>
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h4 ><ion-skeleton-text animated style="width:60%"></ion-skeleton-text></h4>
+              <ion-text>
+                <ion-skeleton-text animated  style="width:40%"></ion-skeleton-text>
+              </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- if there no item -->
+
+        <ion-list *ngIf="filtereProducts.length <= 0 && touched" lines="none">
+          <ion-item  >
+            <ion-label>
+              <h3>No products matches to your keyword</h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

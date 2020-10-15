@@ -1,17 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Tab 2
+      My Cart ( {{cart.count || 0}})
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ng-container *ngIf="cart.productData.length > 0 else showEmptyCart">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 2</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <app-cart-view [prod]="cart.productData"></app-cart-view>
+
+  </ng-container>
+
+  <ng-template #showEmptyCart>
+    <ion-content> 
+      <ion-text class="ion-text-center">  Your Cart Is Empty</ion-text>
+      <ion-button class="ion-text-center" routerLink="/">Continue Shopping</ion-button>
+    </ion-content>
+  </ng-template>
+  
 </ion-content>
+<ion-footer>
+  <ion-toolbar  *ngIf="cart.productData.length > 0">
+    <ion-label slot="start">
+      <ion-text>
+        {{total | currency:'INR'}}
+        <ion-note>({{cart.count}})</ion-note>
+      </ion-text>
+    </ion-label>
+    <ion-buttons>
+      <ion-button
+        class="ion-activatble ripple-parrent"
+        color="warning"
+        expand="full"
+        fill="solid"
+        size="large"
+        routerLink="/checkout"
+      >
+      Go To Checkout
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-footer>
+
+
